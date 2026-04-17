@@ -1,0 +1,14 @@
+{
+  "name": "claude-code-sharon-studio",
+  "owner": {
+    "name": "Tamar Shilon",
+    "email": "shilonraz@gmail.com"
+  },
+  "plugins": [
+    {
+      "name": "sharon-studio",
+      "source": ".",
+      "description": "יועץ עסקי-שיווקי אישי לסטודיו שרון צ׳צ׳יק — כולל 7 סקילים (ידע על העסק + קופי + תמחור + שיווק + תוכן + הצעות)"
+    }
+  ]
+}
