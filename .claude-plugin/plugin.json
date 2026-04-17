@@ -1,0 +1,10 @@
+{
+  "name": "sharon-studio",
+  "version": "1.0.0",
+  "description": "יועץ עסקי-שיווקי אישי לסטודיו שרון צ׳צ׳יק — מכיר את העסק, הלקוחות, החזון וההחלטות הפתוחות. כולל סקילים לתמחור, קופי, שיווק ותוכן.",
+  "author": {
+    "name": "Tamar Shilon",
+    "email": "shilonraz@gmail.com"
+  },
+  "homepage": "https://sharon-tchetchik.netlify.app"
+}
