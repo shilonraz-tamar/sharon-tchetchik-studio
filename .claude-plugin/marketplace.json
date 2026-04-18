@@ -7,8 +7,11 @@
   "plugins": [
     {
       "name": "sharon-studio",
-      "source": ".",
-      "description": "יועץ עסקי-שיווקי אישי לסטודיו שרון צ׳צ׳יק — כולל סקילים לתמחור, קופי, שיווק ותוכן"
+      "source": {
+        "source": "github",
+        "repo": "shilonraz-tamar/sharon-tchetchik-studio"
+      },
+      "description": "יועץ עסקי-שיווקי אישי לסטודיו שרון צ׳צ׳יק"
     }
   ]
 }
