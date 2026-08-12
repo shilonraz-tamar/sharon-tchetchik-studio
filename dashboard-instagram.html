@@ -163,6 +163,7 @@
 <nav class="tabs"><div class="wrap"><div class="inner">
   <button class="tab-btn active" data-tab="snapshot">📊 תמונת מצב</button>
   <button class="tab-btn" data-tab="works">✨ מה עובד לי</button>
+  <button class="tab-btn" data-tab="timing">⏰ מתי ואיך לפרסם</button>
   <button class="tab-btn" data-tab="ideas">💡 רעיונות להמשך</button>
   <button class="tab-btn" data-tab="calendar">🗓️ לוח תוכן</button>
 </div></div></nav>
@@ -258,6 +259,87 @@
   <div class="insight olive">
     <h4>💬 סדנאות = מנוע מעורבות</h4>
     <p>פוסטי הסדנאות לא הובילו בצפיות, אבל ייצרו כמות עצומה של תגובות (עד 1,067 בפוסט אחד) בזכות קריאה לפעולה "כתבו סדנה". מצוין לבניית ביקוש ורשימת המתנה.</p>
+  </div>
+</section>
+
+<!-- ============ TAB: TIMING & HOW ============ -->
+<section class="panel" id="timing">
+  <div class="sec-title">מתי לפרסם</div>
+  <div class="sec-note">לפי שעת הפרסום ויום השבוע של כל 41 הפוסטים (שעון ישראל, כולל שעון קיץ). המספרים הם חציון — כדי שרילס ויראלי בודד לא יעוות את התמונה.</div>
+
+  <div class="insight">
+    <h4>🏆 החלון החזק: בוקר עד צהריים (9:00–15:00)</h4>
+    <p>פוסטים שפורסמו בין הבוקר לצהריים הביאו חציון של 62K–89K צפיות. חלון הצהריים (11:00–15:00) הוא השיא: חציון 88,898 צפיות ו-600 שמירות.</p>
+  </div>
+  <div class="insight rose">
+    <h4>⚠️ הפער שחשוב לתקן: את מפרסמת הכי הרבה בערב — והוא הכי חלש</h4>
+    <p>13 מהפוסטים שלך פורסמו בערב (18:00–22:00), אבל זה החלון החלש ביותר: חציון 19,741 צפיות ו-48 שמירות בלבד. הזזת חלק מהפרסומים לבוקר/צהריים צפויה להכפיל ואף לשלש את החשיפה.</p>
+  </div>
+  <div class="insight olive">
+    <h4>📅 היום החזק: שבת (בבוקר)</h4>
+    <p>שבת היא היום שבו פרסמת הכי הרבה (18 פוסטים) והיא עובדת — רובם המכריע פורסמו בין 9:00–11:00 בבוקר. כלומר: הקסם הוא לא "שבת בערב", אלא <b>שבת בבוקר</b>.</p>
+  </div>
+
+  <div class="grid2">
+    <div class="box">
+      <h3>ביצועים לפי חלון שעות</h3>
+      <div class="hint">חציון צפיות · המספר בסוגריים = כמה פוסטים פרסמת בחלון הזה.</div>
+      <div id="timeBars"></div>
+    </div>
+    <div class="box">
+      <h3>לפי יום בשבוע</h3>
+      <div class="hint">ממוצע צפיות לפוסט. ימים עם מדגם קטן מסומנים (זהירות בפרשנות).</div>
+      <div id="dayBars"></div>
+    </div>
+  </div>
+
+  <div class="box" style="margin-top:18px;border-right:4px solid var(--olive)">
+    <h3>✅ המלצת פרסום מתומצתת</h3>
+    <div class="hint" style="margin-bottom:10px">על בסיס הנתונים שלך (ולא כלל אצבע כללי):</div>
+    <table>
+      <thead><tr><th>יום</th><th>שעה מומלצת</th><th>למה</th></tr></thead>
+      <tbody>
+        <tr><td>שבת</td><td>09:00–11:00</td><td>היום+שעה החזקים ביותר אצלך בפועל</td></tr>
+        <tr><td>שלישי</td><td>11:00–14:00</td><td>יום פעיל אצלך, חלון הצהריים המנצח</td></tr>
+        <tr><td>רביעי / חמישי</td><td>10:00–13:00</td><td>בוקר-צהריים = חשיפה ושמירות גבוהות</td></tr>
+        <tr><td>להימנע</td><td>אחרי 18:00</td><td>החלון החלש ביותר במדידה שלך</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sec-title" style="margin-top:34px">לדבר או לכתוב ברילס?</div>
+  <div class="sec-note">חילקתי את 33 הרילס לשני סוגים לפי אופי התוכן: <b>רילי הדגמה</b> (ידיים עובדות, טקסט ומוזיקה, בלי דיבור) מול <b>רילי דיבור/אישי</b> (את פונה למצלמה, גוף ראשון, שאלה לקהל). התשובה: לא "או-או" — לכל אחד תפקיד אחר.</div>
+
+  <div class="grid2">
+    <div class="box" style="border-top:4px solid var(--terra)">
+      <h3>🤫 רילי הדגמה (בלי דיבור) — n=27</h3>
+      <div class="hint">מנוע הצמיחה: חשיפה, לייקים ושמירות.</div>
+      <table><tbody>
+        <tr><td>ממוצע צפיות</td><td class="num"><b>98,976</b></td></tr>
+        <tr><td>ממוצע שמירות</td><td class="num"><b>752</b></td></tr>
+        <tr><td>ממוצע לייקים</td><td class="num"><b>1,390</b></td></tr>
+        <tr><td>תגובות ל-1,000 צפיות</td><td class="num">1.1</td></tr>
+      </tbody></table>
+    </div>
+    <div class="box" style="border-top:4px solid var(--rose)">
+      <h3>🎤 רילי דיבור/אישי — n=6</h3>
+      <div class="hint">מנוע הקהילה והמכירה: תגובות ופניות.</div>
+      <table><tbody>
+        <tr><td>ממוצע צפיות</td><td class="num">26,218</td></tr>
+        <tr><td>ממוצע שמירות</td><td class="num">84</td></tr>
+        <tr><td>ממוצע תגובות</td><td class="num"><b>347</b></td></tr>
+        <tr><td>תגובות ל-1,000 צפיות</td><td class="num"><b>13.2</b> ✨</td></tr>
+      </tbody></table>
+    </div>
+  </div>
+
+  <div class="insight" style="margin-top:18px">
+    <h4>💡 השורה התחתונה</h4>
+    <p><b>רילי הדגמה שקטים</b> מביאים לך פי ~4 צפיות ופי ~9 שמירות — הם מנוע החשיפה והגדילה. <b>רילי דיבור למצלמה</b> מביאים פי ~12 יותר תגובות ביחס לצפייה — הם מה שסגר לך סדנאות (התמלאו דרך תגובות) ובנה קרבה. תמהיל מנצח: בערך <b>70–80% הדגמה</b> לצמיחה, ו-<b>20–30% דיבור</b> להשקות, מכירות, סיפור אישי ושאלות לקהל.</p>
+  </div>
+  <div class="insight gold">
+    <h4>הערה על הכנות</h4>
+    <p>ששת רילי הדיבור היו ברובם פוסטי סדנאות/מכירה שביקשו במפורש להגיב ("כתבו סדנה"), אז חלק מזינוק התגובות נובע מהקריאה לפעולה — לא רק מהדיבור עצמו. ובכל זאת הכיוון ברור: כשאת מדברת ומבקשת — הקהל עונה.</p>
   </div>
 </section>
 
@@ -391,6 +473,45 @@ function el(tag,cls,html){var e=document.createElement(tag);if(cls)e.className=c
     wrap.appendChild(seg);
   });
   host.appendChild(wrap);
+})();
+
+/* ---------- timing charts ---------- */
+(function(){
+  // median views per time window; n = posts published in window
+  var win=[
+    {lab:'בוקר 06-11', med:61676, n:13},
+    {lab:'צהריים 11-15', med:88898, n:6},
+    {lab:'אחה"צ 15-18', med:22406, n:8},
+    {lab:'ערב 18-22', med:19741, n:13}
+  ];
+  var host=document.getElementById('timeBars');
+  var mx=Math.max.apply(null,win.map(w=>w.med));
+  win.forEach(function(w){
+    var strong=w.med>=mx*0.6;
+    var row=el('div','bar-row');
+    row.innerHTML='<div class="lbl"><span>'+w.lab+' <b style="color:var(--ink-soft);font-weight:600">('+w.n+' פוסטים)</b></span><span class="v">'+fmtNum(w.med)+'</span></div>'+
+      '<div class="track"><div class="fill" style="width:'+(w.med/mx*100)+'%;background:'+(strong?'var(--terra)':'var(--terra-soft)')+'"></div></div>';
+    host.appendChild(row);
+  });
+
+  // by day of week (mean views), with sample size
+  var days=[
+    {lab:'שבת', v:94094, n:18},
+    {lab:'רביעי', v:71916, n:3},
+    {lab:'חמישי', v:35356, n:4},
+    {lab:'שלישי', v:40938, n:10},
+    {lab:'ראשון', v:14856, n:2},
+    {lab:'שני', v:12546, n:3}
+  ];
+  var dh=document.getElementById('dayBars');
+  var dmx=Math.max.apply(null,days.map(d=>d.v));
+  days.forEach(function(d){
+    var small=d.n<4;
+    var row=el('div','bar-row');
+    row.innerHTML='<div class="lbl"><span>'+d.lab+' <b style="color:var(--ink-soft);font-weight:600">('+d.n+(small?' · מדגם קטן':'')+')</b></span><span class="v">'+fmtNum(d.v)+'</span></div>'+
+      '<div class="track"><div class="fill" style="width:'+(d.v/dmx*100)+'%;background:'+(small?'var(--olive-soft)':'var(--olive)')+'"></div></div>';
+    dh.appendChild(row);
+  });
 })();
 
 /* ---------- top posts ---------- */
