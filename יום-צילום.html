@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl"><head><meta charset="UTF-8">
+<title>יום צילום · שרון צציק</title>
+<style>
+  :root{
+    --cream:#F7F3EC; --paper:#FFFFFF; --ink:#3A342E; --ink-soft:#6E655B;
+    --line:#E7DED1; --terra:#C1734B; --terra-soft:#E3B79E; --olive:#7D815A;
+    --olive-soft:#C3C6A6; --gold:#C9A961; --rose:#B5798A; --shadow:0 6px 24px rgba(90,70,50,.08);
+    --radius:16px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--cream);color:var(--ink);
+    font-family:"Assistant","Segoe UI",-apple-system,"Helvetica Neue",Arial,sans-serif;
+    line-height:1.55;-webkit-font-smoothing:antialiased}
+  body{padding:0 0 60px}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+
+  header.top{padding:34px 0 18px}
+  .brand{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+  .brand h1{font-size:26px;font-weight:800;letter-spacing:-.3px}
+  .brand .dot{width:9px;height:9px;border-radius:50%;background:var(--terra);display:inline-block}
+  .sub{color:var(--ink-soft);font-size:15px;margin-top:6px}
+  .meta-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+  .chip{background:var(--paper);border:1px solid var(--line);border-radius:999px;
+    padding:6px 14px;font-size:13px;color:var(--ink-soft);box-shadow:var(--shadow)}
+  .chip b{color:var(--ink)}
+
+  nav.tabs{position:sticky;top:0;z-index:20;background:var(--cream);
+    padding:14px 0 10px;margin-top:8px;border-bottom:1px solid var(--line)}
+  nav.tabs .inner{display:flex;gap:8px;flex-wrap:wrap}
+  .tab-btn{border:1px solid var(--line);background:var(--paper);color:var(--ink-soft);
+    padding:10px 18px;border-radius:999px;font-size:15px;font-weight:600;cursor:pointer;
+    transition:.15s;font-family:inherit}
+  .tab-btn:hover{border-color:var(--terra-soft)}
+  .tab-btn.active{background:var(--terra);color:#fff;border-color:var(--terra);box-shadow:var(--shadow)}
+
+  .panel{display:none;padding-top:26px}
+  .panel.active{display:block;animation:fade .3s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+  .sec-title{font-size:20px;font-weight:800;margin:6px 0 4px}
+  .sec-note{color:var(--ink-soft);font-size:14px;margin-bottom:18px}
+
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px}
+  .kpi{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);
+    padding:18px;box-shadow:var(--shadow)}
+  .kpi .num{font-size:30px;font-weight:800;line-height:1}
+  .kpi .lab{color:var(--ink-soft);font-size:13.5px;margin-top:8px}
+  .kpi.terra .num{color:var(--terra)} .kpi.olive .num{color:var(--olive)}
+  .kpi.gold .num{color:var(--gold)} .kpi.rose .num{color:var(--rose)}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:22px}
+  @media(max-width:760px){.grid2{grid-template-columns:1fr}}
+  .box{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);
+    padding:20px;box-shadow:var(--shadow)}
+  .box h3{font-size:16px;font-weight:800;margin-bottom:4px}
+  .box .hint{color:var(--ink-soft);font-size:13px;margin-bottom:16px}
+
+  /* bar chart */
+  .bar-row{margin-bottom:14px}
+  .bar-row .lbl{display:flex;justify-content:space-between;font-size:13.5px;margin-bottom:5px}
+  .bar-row .lbl .v{font-weight:700}
+  .track{background:var(--cream);border-radius:8px;height:12px;overflow:hidden}
+  .fill{height:100%;border-radius:8px}
+  .fill.reel{background:var(--terra)} .fill.carousel{background:var(--olive)}
+  .legend{display:flex;gap:16px;font-size:13px;color:var(--ink-soft);margin-bottom:16px}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .swatch{width:11px;height:11px;border-radius:3px;display:inline-block}
+  .sw-reel{background:var(--terra)} .sw-carousel{background:var(--olive)}
+
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th,td{text-align:right;padding:10px 8px;border-bottom:1px solid var(--line)}
+  th{color:var(--ink-soft);font-weight:700;font-size:13px}
+  td.num,th.num{text-align:center;font-variant-numeric:tabular-nums}
+  tr:last-child td{border-bottom:none}
+  .type-badge{display:inline-block;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:700}
+  .b-reel{background:#F4E3D9;color:var(--terra)}
+  .b-carousel{background:#EAECD9;color:var(--olive)}
+  .b-image{background:#EDE4EE;color:var(--rose)}
+
+  /* top posts */
+  .post{display:flex;gap:14px;align-items:flex-start;padding:14px;border:1px solid var(--line);
+    border-radius:14px;background:var(--paper);margin-bottom:12px;box-shadow:var(--shadow)}
+  .post .rank{font-size:22px;font-weight:800;color:var(--terra-soft);min-width:28px}
+  .post .body{flex:1}
+  .post .t{font-weight:700;font-size:15px;margin-bottom:6px}
+  .post .stats{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;color:var(--ink-soft)}
+  .post .stats b{color:var(--ink)}
+  .post a{color:var(--terra);text-decoration:none;font-size:13px;font-weight:700;white-space:nowrap}
+  .post a:hover{text-decoration:underline}
+
+  .insight{background:linear-gradient(180deg,#fff, #FBF7F0);border:1px solid var(--line);
+    border-right:4px solid var(--terra);border-radius:12px;padding:16px 18px;margin-bottom:12px;box-shadow:var(--shadow)}
+  .insight h4{font-size:15px;margin-bottom:5px}
+  .insight p{font-size:14px;color:var(--ink-soft)}
+  .insight.olive{border-right-color:var(--olive)}
+  .insight.gold{border-right-color:var(--gold)}
+  .insight.rose{border-right-color:var(--rose)}
+
+  /* ideas */
+  .idea{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);
+    padding:18px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:10px}
+  .ideas-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:760px){.ideas-grid{grid-template-columns:1fr}}
+  .idea .head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+  .idea .num-tag{width:30px;height:30px;border-radius:9px;background:var(--cream);
+    display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--terra);flex-shrink:0}
+  .idea h4{font-size:16px;font-weight:800;line-height:1.35}
+  .idea .why{font-size:13.5px;color:var(--ink-soft)}
+  .idea .rows{display:flex;flex-direction:column;gap:7px;font-size:13.5px}
+  .idea .rows .r{display:flex;gap:8px}
+  .idea .rows .r .k{color:var(--ink-soft);min-width:66px}
+  .idea .rows .r .val{font-weight:600}
+  .fmt{display:inline-block;padding:3px 11px;border-radius:999px;font-size:12px;font-weight:700}
+  .add-btn{margin-top:2px;align-self:flex-start;background:var(--olive);color:#fff;border:none;
+    padding:9px 16px;border-radius:999px;font-size:13.5px;font-weight:700;cursor:pointer;font-family:inherit;transition:.15s}
+  .add-btn:hover{filter:brightness(1.06)}
+  .add-btn.added{background:var(--olive-soft);color:var(--ink);cursor:default}
+
+  /* calendar */
+  .cal-form{display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end;margin-bottom:22px;
+    background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
+  .field{display:flex;flex-direction:column;gap:6px}
+  .field label{font-size:13px;color:var(--ink-soft);font-weight:600}
+  .field select,.field input{font-family:inherit;font-size:14px;padding:9px 12px;border:1px solid var(--line);
+    border-radius:10px;background:var(--cream);color:var(--ink);min-width:160px}
+  .field.grow{flex:1;min-width:220px}
+  .field.grow select{width:100%}
+  .primary{background:var(--terra);color:#fff;border:none;padding:10px 20px;border-radius:10px;
+    font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;height:41px}
+  .primary:hover{filter:brightness(1.05)}
+  .cal-empty{text-align:center;color:var(--ink-soft);padding:40px 20px;font-size:15px}
+  .cal-item{display:flex;gap:14px;align-items:center;background:var(--paper);border:1px solid var(--line);
+    border-radius:14px;padding:14px 16px;margin-bottom:10px;box-shadow:var(--shadow)}
+  .cal-item .date-box{text-align:center;background:var(--cream);border-radius:10px;padding:8px 12px;min-width:70px}
+  .cal-item .date-box .d{font-size:20px;font-weight:800;color:var(--terra);line-height:1}
+  .cal-item .date-box .m{font-size:12px;color:var(--ink-soft);margin-top:3px}
+  .cal-item .ci-body{flex:1}
+  .cal-item .ci-body .ci-t{font-weight:700;font-size:15px}
+  .cal-item .ci-body .ci-meta{font-size:12.5px;color:var(--ink-soft);margin-top:3px}
+  .cal-item .del{background:none;border:none;color:var(--rose);cursor:pointer;font-size:20px;font-family:inherit;padding:4px 8px;border-radius:8px}
+  .cal-item .del:hover{background:#F6E9ED}
+  .dow{font-size:12px;color:var(--olive);font-weight:700}
+
+  footer{margin-top:40px;text-align:center;color:var(--ink-soft);font-size:12.5px}
+</style>
+<style>
+  body{background:#fff}
+  #shoot{display:block!important}
+  .panel{padding-top:0}
+  .doc-head{padding:24px 0 6px}
+  .doc-head h1{font-size:24px;font-weight:800}
+  .doc-head .s{color:var(--ink-soft);font-size:14px;margin-top:4px}
+  .box{break-inside:avoid;page-break-inside:avoid}
+  @page{margin:14mm}
+</style></head>
+<body><div class="wrap">
+  <div class="doc-head">
+    <h1>🎬 יום צילום — תוכנית מלאה</h1>
+    <div class="s">שרון צציק · אירוח ושולחנות מעוצבים · לרביעי</div>
+  </div>
+  <section class="panel" id="shoot">
+  <div class="sec-title">יום צילום עם הצלמת</div>
+  <div class="sec-note">כל החומר לצילום במקום אחד — לנצל את יום הצלמת כדי לאגור תוכן ל-3 השבועות (פופ-אפ + חג), שלא תצטרכי לצלם שוב באמצע הלחץ. מכל סטאפ תפיקי 3: ריל + קלוז-אפ מוצר (סטוריז) + סטיל (אתר/טיזר).</div>
+
+  <div class="box" style="border-right:4px solid var(--terra)">
+    <h3>📋 סדר צילום מומלץ — מינימום החלפות</h3>
+    <div class="hint" style="margin-bottom:8px">העיקרון: מתכלים (אוכל/עגבניות) בבוקר · לקבץ לפי משטח · להחליף שכבות ולא לבנות מחדש · מאנרגיה גבוהה לנמוכה.</div>
+    <ol style="margin:8px 20px 0;font-size:14px;line-height:1.95">
+      <li><b>בופה — כלי כסף</b> (ריל 1) — בוקר, אוכל טרי, הפקה גדולה. קודם כל.</li>
+      <li><b>בופה — קרמיקה</b> (ריל 2) — מחליפים כלי הגשה כסף→קרמיקה על אותו בופה (החלפה, לא בנייה מחדש).</li>
+      <li><b>שולחן עגבניות</b> (רילים 3+4) — עגבניות טריות; סטאפ אחד, שני רילים (מרכז + קיפול פפיון).</li>
+      <li><b>שולחן חג A</b> — מפת פסים בז' + פלייסמט לבן-חום + מרכז רימונים.</li>
+      <li><b>שולחן חג B</b> — מחליפים שכבות למפת מעויינים + פלייסמט פרח. <b>צלמי את ההחלפה עצמה — זה ריל השכבות!</b></li>
+      <li><b>בונוס: ניקוי שעווה</b> — מתי שנוח, מהיר.</li>
+    </ol>
+    <div class="hint" style="margin-top:10px">💡 משולחנות החג (A/B) תפסי גם <b>סטיל מהמם לכריכת הפופ-אפ</b>.</div>
+  </div>
+
+  <!-- BUFFET — 2 REELS -->
+  <div class="box" style="margin-top:16px;border-top:4px solid var(--gold)">
+    <h3>🥇 ריל בופה 1 — הטעות הכי נפוצה (כלי כסף)</h3>
+    <div class="hint">ערך קודם — קצר, מפתיע, נשמר. לפרסם ראשון. חיבור רך למארזי בופה בסוף.</div>
+    <table>
+      <thead><tr><th>שוט</th><th>מה מצלמים</th><th>טקסט על המסך</th></tr></thead>
+      <tbody>
+        <tr><td>הוק 0–3ש</td><td>סכו"ם כסף מונח ליד הצלחות</td><td>"את שמה סכו"ם ליד הצלחות בבופה? עצרי 🤚"</td></tr>
+        <tr><td>3–8ש</td><td>מזיזים את הסכו"ם לקצה הבופה</td><td>"סכו"ם ומפיות תמיד בסוף — לא ליד הצלחות"</td></tr>
+        <tr><td>8–13ש</td><td>מדגימה: יד פנויה מוזגת</td><td>"ככה הידיים פנויות למזוג, בלי לונגל"</td></tr>
+        <tr><td>13–15ש</td><td>wide</td><td>"שמרי 🤍 וזו רק טעות אחת — יש עוד, עקבי"</td></tr>
+      </tbody>
+    </table>
+    <div class="hint" style="margin-top:8px">כלי כסף = הכוכב. הקולבק בסוף מקשר לריל 2 (מרגיש כמו סדרה).</div>
+    <div class="insight olive" style="margin-top:12px"><h4>🔗 חיבור למכירה (רך, בסוף)</h4><p>"שמרי 🤍 ואת כל הכלים אפשר לשכור — <b>מארזי בופה</b>, כתבי 'בופה' ואשלח פרטים"</p></div>
+  </div>
+
+  <div class="box" style="margin-top:16px;border-top:4px solid var(--olive)">
+    <h3>🥇 ריל בופה 2 — הסדר הנכון של האוכל (קרמיקה)</h3>
+    <div class="hint">ההעמקה. מלמד את כל שיטת סידור הבופה. לפרסם אחרי ריל 1, בהפרש. סטיילינג קרמיקה. בלי אוכל — מסמנים את הסדר עם <b>פתקים</b> על כלי ההגשה הריקים, ופרחים לאווירה.</div>
+    <table>
+      <thead><tr><th>שוט</th><th>מה מצלמים</th><th>טקסט על המסך</th></tr></thead>
+      <tbody>
+        <tr><td>הוק 0–3ש</td><td>בופה קרמיקה מסודר</td><td>"רוב האנשים מסדרים בופה לא נכון 🤍"</td></tr>
+        <tr><td>3–7ש</td><td>צלחות בהתחלה</td><td>"1. צלחות בהתחלה"</td></tr>
+        <tr><td>7–13ש</td><td>מניחים פתק על כל כלי הגשה (ריק) לפי הסדר</td><td>"2. בסיס ← עיקריות ← תוספות ← רטבים"</td></tr>
+        <tr><td>13–17ש</td><td>סכו"ם בקצה (קולבק לריל 1)</td><td>"3. סכו"ם בסוף (כמו שאמרנו 😉)"</td></tr>
+        <tr><td>17–24ש</td><td>פינת שתייה נפרדת + wide</td><td>"4. שתייה בשולחן נפרד — מונע פקק"</td></tr>
+      </tbody>
+    </table>
+    <div class="insight olive" style="margin-top:12px"><h4>🔗 חיבור למכירה (רק בריל 2, רך)</h4><p>"שמרי לאירוח הבא 🤍 ואת הכלים — כלי הכסף, הקרמיקה והבופה — אפשר לשכור ממני. כתבי <b>'בופה'</b>"</p></div>
+    <div class="hint" style="margin-top:8px">קרמיקה להשכרה — שווה פיקדון/דמי שבירה על פריטי עבודת יד.</div>
+  </div>
+
+  <!-- TOMATO TABLE -->
+  <div class="box" style="margin-top:16px;border-top:4px solid var(--terra)">
+    <h3>🍅 שולחן עגבניות — על הפלייסמטים החדשים</h3>
+    <div class="hint">Culinarycore (עבד לך, 575 שמירות) + מוכר את הפלייסמט החדש. סטאפ אחד, שתי מטרות.</div>
+    <table>
+      <thead><tr><th>שוט</th><th>מה מצלמים</th><th>טקסט על המסך</th></tr></thead>
+      <tbody>
+        <tr><td>הוק 0–3ש</td><td>קלוז-אפ של המרכז המוגמר / ידיים מתחילות</td><td>"מי אמר שצריך פרחים? 🍅"</td></tr>
+        <tr><td>3–14ש</td><td>בונים מרכז עגבניות (מגוון, גבהים) + ירוק; הפלייסמטים ברורים בכל מקום ישיבה</td><td>"עגבניות = מרכז שולחן מהמם"</td></tr>
+        <tr><td>14–20ש</td><td>קלוז-אפ על הפלייסמט החדש (שוט מכירה) + wide</td><td>"והפלייסמט שמשלים 🤍"</td></tr>
+      </tbody>
+    </table>
+    <div class="hint" style="margin-top:8px">חשוב: אל תתני לעגבניות להסתיר את הפלייסמט — הוא צריך להיראות.</div>
+    <div class="insight olive" style="margin-top:12px"><h4>🔗 חיבור למכירה</h4><p>"הפלייסמטים החדשים מהאתר 🤍 כתבי <b>'פלייסמט'</b> ואשלח קישור"</p></div>
+  </div>
+
+  <!-- TOMATO REEL 4 — napkin bow -->
+  <div class="box" style="margin-top:16px;border-top:4px solid var(--terra)">
+    <h3>🎀 ריל 4 — קיפול מפית לפפיון (על שולחן העגבניות)</h3>
+    <div class="hint">אותו סטאפ עגבניות, ריל שני. פורמט המפיות שלך = שובר שמירות. המפית הלבנה שלך = הכוכב.</div>
+    <table>
+      <thead><tr><th>שוט</th><th>מה מצלמים</th><th>טקסט על המסך</th></tr></thead>
+      <tbody>
+        <tr><td>הוק 0–3ש</td><td>קלוז-אפ ידיים מתחילות את הקיפול</td><td>"קיפול מפית לפפיון — ב-10 שניות 🎀"</td></tr>
+        <tr><td>3–12ש</td><td>הקיפול צעד-צעד עד הפפיון, בשוט יציב</td><td>"פשוט ומרשים"</td></tr>
+        <tr><td>12–18ש</td><td>מניחים על הצלחת בשולחן העגבניות + wide</td><td>"שמרי לאירוח הבא 🤍"</td></tr>
+      </tbody>
+    </table>
+    <div class="insight olive" style="margin-top:12px"><h4>🔗 חיבור למכירה</h4><p>"המפית מהאתר 🤍 כתבי <b>'מפית'</b> ואשלח קישור"</p></div>
+  </div>
+
+  <div class="box" style="border-right:4px solid var(--olive)">
+    <h3>✅ להכין לפני שלוחצים "הקלטה"</h3>
+    <ul style="margin:8px 18px 0;font-size:14px;line-height:1.9">
+      <li><b>בופה:</b> כלי הגשה כסף + קרמיקה, <b>כפות הגשה</b>, מגביהים, טקסטיל, סכו"ם כסף, צלחות, <b>פתקיות שם</b> · <b>פתקים לסימון</b> (במקום אוכל)</li>
+      <li><b>מפות:</b> פסים בז', מעויינים, וראנר לשכבות</li>
+      <li><b>פלייסמטים:</b> החדשים (לעגבניות), לבן-חום, פרח בז' · מפיות לבנות + חבקים</li>
+      <li><b>עגבניות</b> טריות ומגוונות · <b>רימונים</b> + ענפים ירוקים · <b>פרחים טריים לבופה ולשולחנות</b></li>
+      <li>נר + מפה עם שעווה (לריל הבונוס)</li>
+      <li>טלפון על חצובה, אור טבעי ליד חלון, מצב 4K</li>
+    </ul>
+    <div class="hint" style="margin-top:12px">מכל סטאפ תפיקי 3: ריל + קלוז-אפ מוצר (סטוריז) + סטיל (אתר/כריכה).</div>
+  </div>
+
+  <!-- HOLIDAY TABLE A -->
+  <div class="box" style="margin-top:16px;border-top:4px solid var(--rose)">
+    <h3>🍽️ ריל 5 — שולחן חג A (מפת פסים בז' · פלייסמט לבן-חום · רימונים)</h3>
+    <div class="hint">שולחן חג פנימי מלא. מוכר: המפה + הפלייסמטים. תפסי כאן גם סטיל לכריכת הפופ-אפ.</div>
+    <table>
+      <thead><tr><th>שוט</th><th>מה מצלמים</th><th>טקסט על המסך</th></tr></thead>
+      <tbody>
+        <tr><td>הוק 0–3ש</td><td>קלוז-אפ של השולחן המוגמר</td><td>"שולחן ראש השנה מושלם — ככה מרכיבים אותו 🤍"</td></tr>
+        <tr><td>3–14ש</td><td>בנייה: מפת פסים ← פלייסמט לבן-חום ← מרכז רימונים</td><td>"שכבה-שכבה"</td></tr>
+        <tr><td>14–20ש</td><td>שוט wide מרהיב</td><td>"וזהו — שולחן חג ✨"</td></tr>
+      </tbody>
+    </table>
+    <div class="insight olive" style="margin-top:12px"><h4>🔗 חיבור למכירה</h4><p>"המפה והפלייסמטים מהאתר 🤍 כתבי <b>'קישור'</b>"</p></div>
+  </div>
+
+  <!-- HOLIDAY TABLE B -->
+  <div class="box" style="margin-top:16px;border-top:4px solid var(--rose)">
+    <h3>✨ ריל 6 — שולחן חג B + טיפ השכבות (מפת מעויינים · פלייסמט פרח)</h3>
+    <div class="hint">מחליפים שכבות מ-A ל-B — וצלמות את ההחלפה עצמה כתוכן. גם מלמד וגם מוכר יותר (יותר שכבות = יותר פריטים).</div>
+    <table>
+      <thead><tr><th>שוט</th><th>מה מצלמים</th><th>טקסט על המסך</th></tr></thead>
+      <tbody>
+        <tr><td>הוק 0–3ש</td><td>שולחן חצי-ערוך</td><td>"רוצה שולחן חג יותר חגיגי? הסוד הוא שכבות"</td></tr>
+        <tr><td>3–15ש</td><td>מוסיפים שכבה-שכבה: מפת מעויינים ← ראנר ← פלייסמט פרח ← חבק ← מפית</td><td>"מפה ← ראנר ← פלייסמט ← חבק ← מפית"</td></tr>
+        <tr><td>15–22ש</td><td>wide של התוצאה העשירה</td><td>"ככל שיש יותר שכבות — יותר חגיגי 🤍"</td></tr>
+      </tbody>
+    </table>
+    <div class="insight olive" style="margin-top:12px"><h4>🔗 חיבור למכירה</h4><p>"כל השכבות מהאתר 🤍 כתבי <b>'קישור'</b>"</p></div>
+  </div>
+
+  <!-- BONUS: WAX -->
+  <div class="box" style="margin-top:16px;border-top:4px solid var(--gold)">
+    <h3>✨ בונוס (אם יש זמן) — ריל 7: ניקוי שעווה מהמפה</h3>
+    <div class="hint">טיפ פונקציונלי מנצח (מפתיע, נשמר) — ערך טהור לחשיפה. לא צריך סטאפ שלם, רק מפה עם שעווה.</div>
+    <table>
+      <thead><tr><th>שוט</th><th>מה מצלמים</th><th>טקסט על המסך</th></tr></thead>
+      <tbody>
+        <tr><td>הוק 0–3ש</td><td>שעווה יבשה על מפה</td><td>"נשפכה שעווה על המפה? אל תזרקי אותה 🤍"</td></tr>
+        <tr><td>3–15ש</td><td>שלבי הניקוי צעד-צעד</td><td>"ככה מורידים שעווה בלי להרוס את המפה"</td></tr>
+        <tr><td>15–18ש</td><td>המפה נקייה</td><td>"שמרי לפעם הבאה 🤍"</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="insight gold" style="margin-top:16px">
+    <h4>3 כללים שישמרו על הערך (וימכרו)</h4>
+    <p>1. המכירה אף פעם לא בהוק ולא באמצע — משפט קישור אחד בסוף בלבד. 2. "כתבי מילה" עדיף על "לינק בביו" (לידים חמים + יותר תגובות). 3. תמיד תגובה מוצמדת (pinned) עם הלינק הישיר + לינק בביו על הקולקציה הרלוונטית.</p>
+  </div>
+</section>
+</div></body></html>
